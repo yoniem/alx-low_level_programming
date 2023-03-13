@@ -1,32 +1,32 @@
+#include "main.h"
 #include <stdlib.h>
-#include "holberton.h"
 
 /**
- * *_strdup - copies the string given as parameter
- * @str: string to duplicate
- *
- * Return: pointer to the copied string (Success), NULL (Error)
- */
+* _strdup - returns a pointer to a newly allocated space in memory,
+* which contains a copy of the string given as a parameter.
+* @str: the source string
+*
+* Return: returns a pointer to the duplicated string.
+* It returns NULL if insufficient memory was available
+*/
 char *_strdup(char *str)
 {
-	char *duplicate;
-	unsigned int i, len;
+  char *copy;
+  int i, len = 0;
 
-	i = 0;
-	len = 0;
+  if (str == NULL)
+     return (NULL);
 
-	if (str == NULL)
-		return (NULL);
+  while (str[len] != '\0')
+     len++;
 
-	while (str[len])
-		len++;
-	duplicate = malloc(sizeof(char) * (len + 1));
+  copy = (char *)malloc((sizeof(char) * len) + 1);
+  if (copy == NULL)
+     return (NULL);
 
-	if (duplicate == NULL)
-		return (NULL);
+  for (i = 0; i < len; i++)
+     copy[i] = str[i];
+  copy[len] = '\0';
 
-	while ((duplicate[i] = str[i]) != '\0')
-		i++;
-
-	return (duplicate);
+  return (copy);
 }
