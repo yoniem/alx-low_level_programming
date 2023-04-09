@@ -3,8 +3,8 @@
 
 /**
  * read_textfile- Read text file print to STDOUT.
- * @filename: text file being read.
- * @letters: numb of letters to be read.
+ * @filename: text file being read
+ * @letters: numb of letters to be read
  * Return: w- actual numb of bytes read and printed
  *        0 when function fails or filename is NULL.
  */
