@@ -5,10 +5,10 @@
  * @filename: A pointer to the name of a file to create.
  * @text_content: A pointer to a string to write to a file.
  *
- * Return: If the function fails - -1.
+ * Return: If the function fails - -1
  *         Otherwise - 1.
  */
-int create_files(const char *filename, char *text_content)
+int create_file(const char *filename, char *text_content)
 {
 	int fd, w, len = 0;
 
