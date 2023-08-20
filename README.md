@@ -1,5 +1,23 @@
 0x17. C - Doubly linked lists
 
+Please use this data structure for this project:
+
+/**
+ * struct dlistint_s - doubly linked list
+ * @n: integer
+ * @prev: points to the previous node
+ * @next: points to the next node
+ *
+ * Description: doubly linked list node structure
+ * 
+ */
+typedef struct dlistint_s
+{
+    int n;
+    struct dlistint_s *prev;
+    struct dlistint_s *next;
+} dlistint_t;
+
 0. Print list
 mandatory
 Score: 0.0% (Checks completed: 0.0%)
@@ -31,7 +49,6 @@ Write a function that adds a new node at the end of a dlistint_t list.
 
 Prototype: dlistint_t *add_dnodeint_end(dlistint_t **head, const int n);
 Return: the address of the new element, or NULL if it failed
-
 4. Free list
 mandatory
 Score: 0.0% (Checks completed: 0.0%)
@@ -94,14 +111,3 @@ Find the largest palindrome made from the product of two 3-digit numbers.
 
 Save the result in the file 102-result
 Your file should contain the exact result, no new line, no extra space
-
-11. crackme5
-#advanced
-Score: 0.0% (Checks completed: 0.0%)
-Write a keygen for crackme5.
-
-Usage of the crackme: ./crackme5 username key
-The crackme will segfault if you do not enter the correct key for the user
-Usage for your keygen: ./keygen5 username
-Your keygen should print a valid key for the username
-
