@@ -1,19 +1,29 @@
 #include "hash_tables.h"
 
 /**
- * hash_djb2 - Hash function implementing the djb2 algorithm.
- * @str: The string to hash.
+ * hash_table_get - Retrieve the value associated with
+ *                  a key in a hash table.
+ * @ht: A pointer to the hash table.
+ * @key: The key to get the value of.
  *
- * Return: The calculated hash.
+ * Return: If the key cannot be matched - NULL.
+ *         Otherwise - the value associated with key in ht.
  */
-unsigned long int hash_djb2(const unsigned char *str)
+char *hash_table_get(const hash_table_t *ht, const char *key)
 {
-	unsigned long int hash;
-	int c;
+	hash_node_t *node;
+	unsigned long int index;
 
-	hash = 5381;
-	while ((c = *str++))
-		hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+	if (ht == NULL || key == NULL || *key == '\0')
+		return (NULL);
 
-	return (hash);
+	index = key_index((const unsigned char *)key, ht->size);
+	if (index >= ht->size)
+		return (NULL);
+
+	node = ht->array[index];
+	while (node && strcmp(node->key, key) != 0)
+		node = node->next;
+
+	return ((node == NULL) ? NULL : node->value);
 }
