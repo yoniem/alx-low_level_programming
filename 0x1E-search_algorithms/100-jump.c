@@ -1,50 +1,39 @@
 #include "search_algos.h"
-/**
-  * jump_search - Searches for a value in a sorted array
-  *               of integers using jump search.
-  * @array: A pointer to the first element of the array to search.
-  * @size: The number of elements in the array.
-  * @value: The value to search for.
-  *
-  * Return: If the value is not present or the array is NULL, -1.
-  *         Otherwise, the first index where the value is located.
-  */
+#include <stdio.h>
+#include <math.h>
 
+/**
+ * jump_search - searches for a value in a sorted array of integers
+ * using the Jump search algorithm
+ * @array: pointer to the first element of the array
+ * @size: number of elements in the array
+ * @value: value to search for
+ * Return: index of value if found, -1 otherwise
+ */
 int jump_search(int *array, size_t size, int value)
 {
-	size_t i, jump, step;
+    if (array == NULL)
+        return -1;
 
-	/* Check if the array is NULL or empty */
-	if (array == NULL || size == 0)
-		return (-1);
+    size_t jump_step = sqrt(size);
+    size_t start = 0;
+    size_t end = jump_step;
 
-	/* Calculate the jump step size */
-	step = sqrt(size);
+    printf("Value checked array[%lu] = [%d]\n", start, array[start]);
+    while (end < size && array[end] < value)
+    {
+        start = end;
+        end += jump_step;
+        printf("Value checked array[%lu] = [%d]\n", start, array[start]);
+    }
 
-	/* Perform the jump search */
-	for (i = jump = 0; jump < size && array[jump] < value;)
-	{
-		printf("Value checked array[%ld] = [%d]\n", jump, array[jump]);
+    printf("Value found between indexes [%lu] and [%lu]\n", start, end);
+    for (size_t i = start; i <= end && i < size; i++)
+    {
+        printf("Value checked array[%lu] = [%d]\n", i, array[i]);
+        if (array[i] == value)
+            return i;
+    }
 
-		/* Store the previous jump position */
-		i = jump;
-
-		/* Update the jump position */
-		jump += step;
-	}
-
-	printf("Value found between indexes [%ld] and [%ld]\n", i, jump);
-
-	/* Adjust the jump position */
-	jump = jump < size - 1 ? jump : size - 1;
-
-	/* Perform a linear search within the identified range */
-	for (; i < jump && array[i] < value; i++)
-		printf("Value checked array[%ld] = [%d]\n", i, array[i]);
-
-	printf("Value checked array[%ld] = [%d]\n", i, array[i]);
-
-	/* Check if the value is found and return the corresponding index */
-	return (array[i] == value ? (int)i : -1);
+    return -1; // Not found
 }
-
